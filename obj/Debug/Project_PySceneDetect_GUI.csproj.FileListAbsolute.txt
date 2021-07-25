@@ -8,3 +8,5 @@ D:\Data\Project\Project_PySceneDetect_GUI\Project_PySceneDetect_GUI\obj\Debug\Pr
 D:\Data\Project\Project_PySceneDetect_GUI\Project_PySceneDetect_GUI\obj\Debug\Project_PySceneDetect_GUI.exe
 D:\Data\Project\Project_PySceneDetect_GUI\Project_PySceneDetect_GUI\obj\Debug\Project_PySceneDetect_GUI.pdb
 D:\Data\Project\Project_PySceneDetect_GUI\Project_PySceneDetect_GUI\obj\Debug\Project_PySceneDetect_GUI.Form1.resources
+D:\Data\Project\Project_PySceneDetect_GUI\Project_PySceneDetect_GUI\bin\Debug\KAutoHelper.dll
+D:\Data\Project\Project_PySceneDetect_GUI\Project_PySceneDetect_GUI\obj\Debug\Project_PySceneDetect_GUI.csproj.CopyComplete

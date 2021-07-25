@@ -31,6 +31,10 @@ namespace Project_PySceneDetect_GUI
         {
             this.gbListVideo = new System.Windows.Forms.GroupBox();
             this.dgvListvideo = new System.Windows.Forms.DataGridView();
+            this.dgvcNameVideo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dgvHaveExportImage = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvcCheckAllVideo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.dgvcPathTimeVideo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbOutput = new System.Windows.Forms.GroupBox();
             this.btSaveOutput = new System.Windows.Forms.Button();
             this.rtbOutput = new System.Windows.Forms.RichTextBox();
@@ -52,12 +56,9 @@ namespace Project_PySceneDetect_GUI
             this.lbPathOutput = new System.Windows.Forms.Label();
             this.tbPathOutput = new System.Windows.Forms.TextBox();
             this.tbPathVideo = new System.Windows.Forms.TextBox();
-            this.btRun = new System.Windows.Forms.Button();
+            this.btPathOutput = new System.Windows.Forms.Button();
             this.btGetPathVideo = new System.Windows.Forms.Button();
-            this.dgvcNameVideo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dgvHaveExportImage = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvcCheckAllVideo = new System.Windows.Forms.DataGridViewCheckBoxColumn();
-            this.dgvcPathTimeVideo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btRun = new System.Windows.Forms.Button();
             this.gbListVideo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListvideo)).BeginInit();
             this.gbOutput.SuspendLayout();
@@ -69,7 +70,7 @@ namespace Project_PySceneDetect_GUI
             // 
             this.gbListVideo.Controls.Add(this.dgvListvideo);
             this.gbListVideo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.gbListVideo.Location = new System.Drawing.Point(12, 69);
+            this.gbListVideo.Location = new System.Drawing.Point(12, 98);
             this.gbListVideo.Name = "gbListVideo";
             this.gbListVideo.Size = new System.Drawing.Size(776, 263);
             this.gbListVideo.TabIndex = 0;
@@ -90,14 +91,45 @@ namespace Project_PySceneDetect_GUI
             this.dgvListvideo.TabIndex = 0;
             this.dgvListvideo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvListvideo_CellContentClick);
             // 
+            // dgvcNameVideo
+            // 
+            this.dgvcNameVideo.Frozen = true;
+            this.dgvcNameVideo.HeaderText = "Tên video";
+            this.dgvcNameVideo.Name = "dgvcNameVideo";
+            this.dgvcNameVideo.ReadOnly = true;
+            this.dgvcNameVideo.Width = 250;
+            // 
+            // dgvHaveExportImage
+            // 
+            this.dgvHaveExportImage.Frozen = true;
+            this.dgvHaveExportImage.HeaderText = "Xuất ra hình ảnh";
+            this.dgvHaveExportImage.Name = "dgvHaveExportImage";
+            this.dgvHaveExportImage.ReadOnly = true;
+            // 
+            // dgvcCheckAllVideo
+            // 
+            this.dgvcCheckAllVideo.Frozen = true;
+            this.dgvcCheckAllVideo.HeaderText = "Quét toàn bộ video";
+            this.dgvcCheckAllVideo.Name = "dgvcCheckAllVideo";
+            this.dgvcCheckAllVideo.ReadOnly = true;
+            this.dgvcCheckAllVideo.Width = 130;
+            // 
+            // dgvcPathTimeVideo
+            // 
+            this.dgvcPathTimeVideo.Frozen = true;
+            this.dgvcPathTimeVideo.HeaderText = "Địa chỉ file chứa các mốc thời gian";
+            this.dgvcPathTimeVideo.Name = "dgvcPathTimeVideo";
+            this.dgvcPathTimeVideo.ReadOnly = true;
+            this.dgvcPathTimeVideo.Width = 220;
+            // 
             // gbOutput
             // 
             this.gbOutput.Controls.Add(this.btSaveOutput);
             this.gbOutput.Controls.Add(this.rtbOutput);
             this.gbOutput.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.gbOutput.Location = new System.Drawing.Point(415, 338);
+            this.gbOutput.Location = new System.Drawing.Point(421, 367);
             this.gbOutput.Name = "gbOutput";
-            this.gbOutput.Size = new System.Drawing.Size(373, 212);
+            this.gbOutput.Size = new System.Drawing.Size(367, 212);
             this.gbOutput.TabIndex = 0;
             this.gbOutput.TabStop = false;
             this.gbOutput.Text = "Output";
@@ -115,7 +147,7 @@ namespace Project_PySceneDetect_GUI
             // 
             this.rtbOutput.Location = new System.Drawing.Point(6, 18);
             this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.Size = new System.Drawing.Size(361, 157);
+            this.rtbOutput.Size = new System.Drawing.Size(355, 157);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
             // 
@@ -130,7 +162,7 @@ namespace Project_PySceneDetect_GUI
             this.gbInfoVideo.Controls.Add(this.lbScanChoose);
             this.gbInfoVideo.Controls.Add(this.lbTextNameVideo);
             this.gbInfoVideo.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.gbInfoVideo.Location = new System.Drawing.Point(12, 338);
+            this.gbInfoVideo.Location = new System.Drawing.Point(12, 367);
             this.gbInfoVideo.Name = "gbInfoVideo";
             this.gbInfoVideo.Size = new System.Drawing.Size(403, 212);
             this.gbInfoVideo.TabIndex = 0;
@@ -172,6 +204,7 @@ namespace Project_PySceneDetect_GUI
             this.btSave.TabIndex = 6;
             this.btSave.Text = "Lưu";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.btSave_Click);
             // 
             // panel1
             // 
@@ -298,15 +331,16 @@ namespace Project_PySceneDetect_GUI
             this.tbPathVideo.Size = new System.Drawing.Size(496, 23);
             this.tbPathVideo.TabIndex = 6;
             // 
-            // btRun
+            // btPathOutput
             // 
-            this.btRun.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btRun.Location = new System.Drawing.Point(608, 40);
-            this.btRun.Name = "btRun";
-            this.btRun.Size = new System.Drawing.Size(180, 23);
-            this.btRun.TabIndex = 7;
-            this.btRun.Text = "Thực thi";
-            this.btRun.UseVisualStyleBackColor = true;
+            this.btPathOutput.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btPathOutput.Location = new System.Drawing.Point(608, 40);
+            this.btPathOutput.Name = "btPathOutput";
+            this.btPathOutput.Size = new System.Drawing.Size(180, 23);
+            this.btPathOutput.TabIndex = 7;
+            this.btPathOutput.Text = "Chọn vị trí";
+            this.btPathOutput.UseVisualStyleBackColor = true;
+            this.btPathOutput.Click += new System.EventHandler(this.btPathOutput_Click);
             // 
             // btGetPathVideo
             // 
@@ -319,43 +353,24 @@ namespace Project_PySceneDetect_GUI
             this.btGetPathVideo.UseVisualStyleBackColor = true;
             this.btGetPathVideo.Click += new System.EventHandler(this.btGetPathVideo_Click);
             // 
-            // dgvcNameVideo
+            // btRun
             // 
-            this.dgvcNameVideo.Frozen = true;
-            this.dgvcNameVideo.HeaderText = "Tên video";
-            this.dgvcNameVideo.Name = "dgvcNameVideo";
-            this.dgvcNameVideo.ReadOnly = true;
-            this.dgvcNameVideo.Width = 250;
-            // 
-            // dgvHaveExportImage
-            // 
-            this.dgvHaveExportImage.Frozen = true;
-            this.dgvHaveExportImage.HeaderText = "Xuất ra hình ảnh";
-            this.dgvHaveExportImage.Name = "dgvHaveExportImage";
-            this.dgvHaveExportImage.ReadOnly = true;
-            // 
-            // dgvcCheckAllVideo
-            // 
-            this.dgvcCheckAllVideo.Frozen = true;
-            this.dgvcCheckAllVideo.HeaderText = "Quét toàn bộ video";
-            this.dgvcCheckAllVideo.Name = "dgvcCheckAllVideo";
-            this.dgvcCheckAllVideo.ReadOnly = true;
-            this.dgvcCheckAllVideo.Width = 130;
-            // 
-            // dgvcPathTimeVideo
-            // 
-            this.dgvcPathTimeVideo.Frozen = true;
-            this.dgvcPathTimeVideo.HeaderText = "Địa chỉ file chứa các mốc thời gian";
-            this.dgvcPathTimeVideo.Name = "dgvcPathTimeVideo";
-            this.dgvcPathTimeVideo.ReadOnly = true;
-            this.dgvcPathTimeVideo.Width = 220;
+            this.btRun.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btRun.Location = new System.Drawing.Point(422, 69);
+            this.btRun.Name = "btRun";
+            this.btRun.Size = new System.Drawing.Size(366, 23);
+            this.btRun.TabIndex = 9;
+            this.btRun.Text = "Thực thi";
+            this.btRun.UseVisualStyleBackColor = true;
+            this.btRun.Click += new System.EventHandler(this.btRun_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 555);
+            this.ClientSize = new System.Drawing.Size(800, 586);
             this.Controls.Add(this.btRun);
+            this.Controls.Add(this.btPathOutput);
             this.Controls.Add(this.btGetPathVideo);
             this.Controls.Add(this.tbPathVideo);
             this.Controls.Add(this.tbPathOutput);
@@ -400,7 +415,7 @@ namespace Project_PySceneDetect_GUI
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Button btGetPathTimeVideo;
         private System.Windows.Forms.RadioButton rbNotAllVideo;
-        private System.Windows.Forms.Button btRun;
+        private System.Windows.Forms.Button btPathOutput;
         private System.Windows.Forms.Button btGetPathVideo;
         private System.Windows.Forms.DataGridView dgvListvideo;
         private System.Windows.Forms.CheckBox cbExportImage;
@@ -409,6 +424,7 @@ namespace Project_PySceneDetect_GUI
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvHaveExportImage;
         private System.Windows.Forms.DataGridViewCheckBoxColumn dgvcCheckAllVideo;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvcPathTimeVideo;
+        private System.Windows.Forms.Button btRun;
     }
 }
 
