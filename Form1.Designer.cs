@@ -37,8 +37,8 @@ namespace Project_PySceneDetect_GUI
             this.gbInfoVideo = new System.Windows.Forms.GroupBox();
             this.lbNameVideo = new System.Windows.Forms.Label();
             this.cbExportImage = new System.Windows.Forms.CheckBox();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
+            this.btDelete = new System.Windows.Forms.Button();
+            this.btSave = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btGetPathTimeVideo = new System.Windows.Forms.Button();
             this.rbNotAllVideo = new System.Windows.Forms.RadioButton();
@@ -123,8 +123,8 @@ namespace Project_PySceneDetect_GUI
             // 
             this.gbInfoVideo.Controls.Add(this.lbNameVideo);
             this.gbInfoVideo.Controls.Add(this.cbExportImage);
-            this.gbInfoVideo.Controls.Add(this.button5);
-            this.gbInfoVideo.Controls.Add(this.button6);
+            this.gbInfoVideo.Controls.Add(this.btDelete);
+            this.gbInfoVideo.Controls.Add(this.btSave);
             this.gbInfoVideo.Controls.Add(this.panel1);
             this.gbInfoVideo.Controls.Add(this.lbExportImage);
             this.gbInfoVideo.Controls.Add(this.lbScanChoose);
@@ -154,23 +154,24 @@ namespace Project_PySceneDetect_GUI
             this.cbExportImage.TabIndex = 7;
             this.cbExportImage.UseVisualStyleBackColor = true;
             // 
-            // button5
+            // btDelete
             // 
-            this.button5.Location = new System.Drawing.Point(232, 182);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "Xoá";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btDelete.Location = new System.Drawing.Point(232, 182);
+            this.btDelete.Name = "btDelete";
+            this.btDelete.Size = new System.Drawing.Size(75, 23);
+            this.btDelete.TabIndex = 5;
+            this.btDelete.Text = "Xoá";
+            this.btDelete.UseVisualStyleBackColor = true;
+            this.btDelete.Click += new System.EventHandler(this.btDelete_Click);
             // 
-            // button6
+            // btSave
             // 
-            this.button6.Location = new System.Drawing.Point(313, 181);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 6;
-            this.button6.Text = "Lưu";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btSave.Location = new System.Drawing.Point(313, 181);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(75, 23);
+            this.btSave.TabIndex = 6;
+            this.btSave.Text = "Lưu";
+            this.btSave.UseVisualStyleBackColor = true;
             // 
             // panel1
             // 
@@ -192,6 +193,7 @@ namespace Project_PySceneDetect_GUI
             this.btGetPathTimeVideo.TabIndex = 4;
             this.btGetPathTimeVideo.Text = "Chọn";
             this.btGetPathTimeVideo.UseVisualStyleBackColor = true;
+            this.btGetPathTimeVideo.Click += new System.EventHandler(this.btGetPathTimeVideo_Click);
             // 
             // rbNotAllVideo
             // 
@@ -394,8 +396,8 @@ namespace Project_PySceneDetect_GUI
         private System.Windows.Forms.RadioButton rbAllVideo;
         private System.Windows.Forms.Button btSaveOutput;
         private System.Windows.Forms.RichTextBox rtbOutput;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button btDelete;
+        private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.Button btGetPathTimeVideo;
         private System.Windows.Forms.RadioButton rbNotAllVideo;
         private System.Windows.Forms.Button btRun;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -33,6 +34,8 @@ namespace Project_PySceneDetect_GUI
             rbAllVideo.Enabled = false;
             rbNotAllVideo.Enabled = false;
             cbExportImage.Enabled = false;
+            btDelete.Enabled = false;
+            btSave.Enabled = false;
         }
         ToolTip tip = new ToolTip();
         List<OneVideo> listVideo = new List<OneVideo>();
@@ -88,6 +91,8 @@ namespace Project_PySceneDetect_GUI
             cbExportImage.Enabled = true;
             rbAllVideo.Enabled = true;
             rbNotAllVideo.Enabled = true;
+            btDelete.Enabled = true;
+            btSave.Enabled = true;
             int rowId = dgvListvideo.CurrentCell.RowIndex;
             lbNameVideo.Text = (string)dgvListvideo.Rows[rowId].Cells[0].Value;
             if ((bool)dgvListvideo.Rows[rowId].Cells[1].Value == true)
@@ -107,6 +112,54 @@ namespace Project_PySceneDetect_GUI
             {
                 rbNotAllVideo.Checked = true;
                 tbPathTimeVideo.Text = (string)dgvListvideo.Rows[rowId].Cells[3].Value;
+            }
+        }
+
+        private void btDelete_Click(object sender, EventArgs e)
+        {
+            int rowId = dgvListvideo.CurrentCell.RowIndex;
+            dgvListvideo.Rows.RemoveAt(rowId);
+            listVideo.RemoveAt(rowId);
+            if (rowId != dgvListvideo.RowCount)
+            {
+                lbNameVideo.Text = (string)dgvListvideo.Rows[rowId].Cells[0].Value;
+                if ((bool)dgvListvideo.Rows[rowId].Cells[1].Value == true)
+                {
+                    cbExportImage.Checked = true;
+                }
+                else
+                {
+                    cbExportImage.Checked = false;
+                }
+
+                if ((bool)dgvListvideo.Rows[rowId].Cells[2].Value == true)
+                {
+                    rbAllVideo.Checked = true;
+                }
+                else
+                {
+                    rbNotAllVideo.Checked = true;
+                    tbPathTimeVideo.Text = (string)dgvListvideo.Rows[rowId].Cells[3].Value;
+                }
+            }
+            else
+            {
+                lbNameVideo.Text = "";
+                rbAllVideo.Enabled = false;
+                rbNotAllVideo.Enabled = false;
+                cbExportImage.Enabled = false;
+                btDelete.Enabled = false;
+                btSave.Enabled = false;
+            }
+            
+        }
+
+        private void btGetPathTimeVideo_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                //tbPathVideo
             }
         }
     }
