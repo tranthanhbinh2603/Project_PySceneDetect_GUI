@@ -88,6 +88,7 @@ namespace Project_PySceneDetect_GUI
             this.dgvListvideo.Name = "dgvListvideo";
             this.dgvListvideo.Size = new System.Drawing.Size(761, 241);
             this.dgvListvideo.TabIndex = 0;
+            this.dgvListvideo.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DgvListvideo_CellContentClick);
             // 
             // gbOutput
             // 
@@ -96,14 +97,14 @@ namespace Project_PySceneDetect_GUI
             this.gbOutput.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gbOutput.Location = new System.Drawing.Point(415, 338);
             this.gbOutput.Name = "gbOutput";
-            this.gbOutput.Size = new System.Drawing.Size(373, 184);
+            this.gbOutput.Size = new System.Drawing.Size(373, 212);
             this.gbOutput.TabIndex = 0;
             this.gbOutput.TabStop = false;
             this.gbOutput.Text = "Output";
             // 
             // btSaveOutput
             // 
-            this.btSaveOutput.Location = new System.Drawing.Point(292, 152);
+            this.btSaveOutput.Location = new System.Drawing.Point(292, 181);
             this.btSaveOutput.Name = "btSaveOutput";
             this.btSaveOutput.Size = new System.Drawing.Size(75, 23);
             this.btSaveOutput.TabIndex = 1;
@@ -114,7 +115,7 @@ namespace Project_PySceneDetect_GUI
             // 
             this.rtbOutput.Location = new System.Drawing.Point(6, 18);
             this.rtbOutput.Name = "rtbOutput";
-            this.rtbOutput.Size = new System.Drawing.Size(361, 130);
+            this.rtbOutput.Size = new System.Drawing.Size(361, 157);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
             // 
@@ -131,7 +132,7 @@ namespace Project_PySceneDetect_GUI
             this.gbInfoVideo.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.gbInfoVideo.Location = new System.Drawing.Point(12, 338);
             this.gbInfoVideo.Name = "gbInfoVideo";
-            this.gbInfoVideo.Size = new System.Drawing.Size(397, 184);
+            this.gbInfoVideo.Size = new System.Drawing.Size(403, 212);
             this.gbInfoVideo.TabIndex = 0;
             this.gbInfoVideo.TabStop = false;
             this.gbInfoVideo.Text = "Thông tin về video";
@@ -155,7 +156,7 @@ namespace Project_PySceneDetect_GUI
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(235, 16);
+            this.button5.Location = new System.Drawing.Point(232, 182);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 5;
@@ -164,7 +165,7 @@ namespace Project_PySceneDetect_GUI
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(316, 16);
+            this.button6.Location = new System.Drawing.Point(313, 181);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 6;
@@ -180,12 +181,12 @@ namespace Project_PySceneDetect_GUI
             this.panel1.Controls.Add(this.tbPathTimeVideo);
             this.panel1.Location = new System.Drawing.Point(23, 94);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(358, 81);
+            this.panel1.Size = new System.Drawing.Size(368, 81);
             this.panel1.TabIndex = 6;
             // 
             // btGetPathTimeVideo
             // 
-            this.btGetPathTimeVideo.Location = new System.Drawing.Point(256, 45);
+            this.btGetPathTimeVideo.Location = new System.Drawing.Point(290, 50);
             this.btGetPathTimeVideo.Name = "btGetPathTimeVideo";
             this.btGetPathTimeVideo.Size = new System.Drawing.Size(75, 23);
             this.btGetPathTimeVideo.TabIndex = 4;
@@ -202,6 +203,7 @@ namespace Project_PySceneDetect_GUI
             this.rbNotAllVideo.TabStop = true;
             this.rbNotAllVideo.Text = "Một phần video";
             this.rbNotAllVideo.UseVisualStyleBackColor = true;
+            this.rbNotAllVideo.CheckedChanged += new System.EventHandler(this.rbNotAllVideo_CheckedChanged);
             // 
             // rbAllVideo
             // 
@@ -213,6 +215,7 @@ namespace Project_PySceneDetect_GUI
             this.rbAllVideo.TabStop = true;
             this.rbAllVideo.Text = "Toàn video";
             this.rbAllVideo.UseVisualStyleBackColor = true;
+            this.rbAllVideo.CheckedChanged += new System.EventHandler(this.rbAllVideo_CheckedChanged);
             // 
             // lbPathTimeVideo
             // 
@@ -227,7 +230,7 @@ namespace Project_PySceneDetect_GUI
             // 
             this.tbPathTimeVideo.Location = new System.Drawing.Point(67, 47);
             this.tbPathTimeVideo.Name = "tbPathTimeVideo";
-            this.tbPathTimeVideo.Size = new System.Drawing.Size(183, 23);
+            this.tbPathTimeVideo.Size = new System.Drawing.Size(217, 23);
             this.tbPathTimeVideo.TabIndex = 4;
             // 
             // lbExportImage
@@ -312,6 +315,7 @@ namespace Project_PySceneDetect_GUI
             this.btGetPathVideo.TabIndex = 8;
             this.btGetPathVideo.Text = "Quét video trong thư mục";
             this.btGetPathVideo.UseVisualStyleBackColor = true;
+            this.btGetPathVideo.Click += new System.EventHandler(this.btGetPathVideo_Click);
             // 
             // dgvcNameVideo
             // 
@@ -348,7 +352,7 @@ namespace Project_PySceneDetect_GUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 534);
+            this.ClientSize = new System.Drawing.Size(800, 555);
             this.Controls.Add(this.btRun);
             this.Controls.Add(this.btGetPathVideo);
             this.Controls.Add(this.tbPathVideo);
