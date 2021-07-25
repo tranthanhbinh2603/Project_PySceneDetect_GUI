@@ -274,6 +274,7 @@ namespace Project_PySceneDetect_GUI
                 Directory.CreateDirectory(tbPathOutput.Text + @"\Output");
                 foreach (var item in listVideo)
                 {
+                    #region Tạo thư mục
                     string pathParent = tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo);
                     rtbOutput.Text += "Thêm Folder " + pathParent + "\n";
                     Directory.CreateDirectory(pathParent);
@@ -291,25 +292,9 @@ namespace Project_PySceneDetect_GUI
                             string[] time = res.Split(' ');
                             if (time.Length == 2)
                             {
-                                //string path = (pathParent + @"\From " + time[0] + " to " + time[1]).Replace(':', '-');
-                                //DirectorySecurity dir = new DirectorySecurity();
-                                //dir. = true;
-                                //Directory.CreateDirectory(path);
-                                int intCast;
-                                int.TryParse(time[0], out intCast);
-                                if (intCast == 0)
-                                {
-                                    string path = pathParent + (@"\From start video to " + time[1]).Replace(':', '-');
-                                    Directory.CreateDirectory(path);
-                                    rtbOutput.Text += "Thêm Folder " + path + "\n";
-                                }
-                                else
-                                {
-                                    string path = pathParent + (@"\From " + time[0] + " to " + time[1]).Replace(':', '-');
-                                    Directory.CreateDirectory(path);
-                                    rtbOutput.Text += "Thêm Folder " + path + "\n";
-                                }
-
+                                string path = pathParent + (@"\From " + time[0] + " to " + time[1]).Replace(':', '-');
+                                Directory.CreateDirectory(path);
+                                rtbOutput.Text += "Thêm Folder " + path + "\n";
                             }
                             else
                             {
@@ -321,14 +306,16 @@ namespace Project_PySceneDetect_GUI
                         }
                     }
                 }
+                #endregion
+
+                #region Chạy code từng file
                 foreach (var item in listVideo)
                 {
-                    rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
                     if (item.scanAllVideo == true)
                     {
                         if (item.haveExportImage == true)
                         {
-                            //Quét toàn bộ video và xuất ra hình ảnh
+                            rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
                             Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes save-images");
 
                             IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
@@ -341,7 +328,6 @@ namespace Project_PySceneDetect_GUI
                         }
                         else
                         {
-                            //Quét toàn bộ video và không xuất ra hình ảnh
                             rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
                             Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes");
 
@@ -358,51 +344,29 @@ namespace Project_PySceneDetect_GUI
                     {
                         if (item.haveExportImage == true)
                         {
-                            //Quét theo từng phân đoạn và xuất ra hình ảnh
                             StreamReader streread = new StreamReader(item.pathTimeVideo);
                             string res = streread.ReadLine();
                             while (res != null)
                             {
                                 string[] time = res.Split(' ');
                                 if (time.Length == 2)
-                                {
-                                    int intCast;
-                                    int.TryParse(time[0], out intCast);
-                                    if (intCast == 0)
+                                {                                   
+                                    rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
+                                    Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + (@"\From " + time[0] + " to " + time[1]).Replace(':', '-') + "\" time --start " + time[0] + " --end " + time[1] + " detect-content list-scenes save-images");
+
+                                    IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
+                                    Thread.Sleep(5000);
+                                    while (hdle.ToString() != "0")
                                     {
-                                        //Trường hợp quét từ đầu video
-                                        rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
-                                        Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes save-images");
-
-                                        IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        Thread.Sleep(5000);
-                                        while (hdle.ToString() != "0")
-                                        {
-                                            Thread.Sleep(500);
-                                            hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        }
+                                        Thread.Sleep(500);
+                                        hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
                                     }
-                                    else
-                                    {
-                                        //Trường hợp quét mà điểm đầu cuối không xác định
-                                        rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
-                                        Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes save-images");
-
-                                        IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        Thread.Sleep(5000);
-                                        while (hdle.ToString() != "0")
-                                        {
-                                            Thread.Sleep(500);
-                                            hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        }
-                                    }
-
                                 }
                                 else
                                 {
                                     //Quét video có điểm cuối là cuối video
                                     rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
-                                    Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes save-images");
+                                    Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + (@"\From " + time[0] + " to end video").Replace(':', '-') + "\" time --start " + time[0] + " detect-content list-scenes save-images");
 
                                     IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
                                     Thread.Sleep(5000);
@@ -424,44 +388,24 @@ namespace Project_PySceneDetect_GUI
                             {
                                 string[] time = res.Split(' ');
                                 if (time.Length == 2)
-                                {
-                                    int intCast;
-                                    int.TryParse(time[0], out intCast);
-                                    if (intCast == 0)
+                                {                                   
+                                    //Trường hợp quét mà điểm đầu cuối không xác định
+                                    rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
+                                    Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + (@"\From " + time[0] + " to " + time[1]).Replace(':', '-') + "\" time --start " + time[0] + " --end " + time[1] + " detect-content list-scenes");
+
+                                    IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
+                                    Thread.Sleep(5000);
+                                    while (hdle.ToString() != "0")
                                     {
-                                        //Trường hợp quét từ đầu video
-                                        rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
-                                        Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes");
-
-                                        IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        Thread.Sleep(5000);
-                                        while (hdle.ToString() != "0")
-                                        {
-                                            Thread.Sleep(500);
-                                            hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        }
+                                        Thread.Sleep(500);
+                                        hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
                                     }
-                                    else
-                                    {
-                                        //Trường hợp quét mà điểm đầu cuối không xác định
-                                        rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
-                                        Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes");
-
-                                        IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        Thread.Sleep(5000);
-                                        while (hdle.ToString() != "0")
-                                        {
-                                            Thread.Sleep(500);
-                                            hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
-                                        }
-                                    }
-
                                 }
                                 else
                                 {
                                     //Quét video có điểm cuối là cuối video
                                     rtbOutput.Text += "Đang thực thi quét cho video " + item.nameVideo + "\n";
-                                    Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + "\" detect-content list-scenes");
+                                    Process.Start("CMD.exe", "/C" + "scenedetect --input \"" + tbPathVideo.Text + @"\" + item.nameVideo + "\" --output \"" + tbPathOutput.Text + LocDau(@"\Output\" + item.nameVideo) + (@"\From " + time[0] + " to end video").Replace(':', '-') + "\" time --start " + time[0] + " detect-content list-scenes");
 
                                     IntPtr hdle = AutoControl.FindWindowHandle("ConsoleWindowClass", null);
                                     Thread.Sleep(5000);
@@ -476,10 +420,14 @@ namespace Project_PySceneDetect_GUI
                         }
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Thiếu đường dẫn chứa file gốc hoặc (và) đường dẫn đầu ra");
-                }
+            }
+            #endregion
+
+
+            else
+            {
+                MessageBox.Show("Thiếu đường dẫn chứa file gốc hoặc (và) đường dẫn đầu ra");
+            }
                 #endregion
 
 
